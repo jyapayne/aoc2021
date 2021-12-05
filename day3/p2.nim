@@ -12,9 +12,9 @@ proc getMostCommon(indices: var HashSet[int], values: var seq[string]): string =
   result = newString(counts.len)
 
   for (i, val) in enumerate(counts):
-    if val > 0: # one is most common, so gamma is one, epsilon is zero
+    if val > 0: # one is most common
       result[i] = '1'
-    elif val < 0: # zero is most common, so gamma is zero, epsilon is one
+    elif val < 0: # zero is most common
       result[i] = '0'
     else: # zero and one are the same commonality
       result[i] = '1'
@@ -30,9 +30,9 @@ proc getLeastCommon(indices: var HashSet[int], values: var seq[string]): string 
   result = newString(counts.len)
 
   for (i, val) in enumerate(counts):
-    if val > 0: # one is most common, so gamma is one, epsilon is zero
+    if val > 0: # one is most common
       result[i] = '0'
-    elif val < 0: # zero is most common, so gamma is zero, epsilon is one
+    elif val < 0: # zero is most common
       result[i] = '1'
     else: # zero and one are the same commonality
       result[i] = '0'
