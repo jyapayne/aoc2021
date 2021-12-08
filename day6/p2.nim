@@ -8,6 +8,8 @@ proc main() =
 
   let f = fileName.open(fmRead)
 
+  # Lol, I was so tired. Didn't even realize I recreated
+  # an array in table form
   let lanternFishSim = {
     0: 0,
     1: 0,
