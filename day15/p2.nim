@@ -4,6 +4,8 @@ import std/[strutils, sequtils, sets, tables, heapqueue]
 type
   Position = (int, int)
 
+const CAVE_MULT = 5
+
 template `[]`(cavern: seq[string], pos: Position): int =
   let
     multiplierRow = pos[0] div cavern.len
@@ -28,7 +30,7 @@ template neighbors(cavern: seq[string], pos: Position): seq[(Position, int)] =
     (pos[0], pos[1] + 1),
     (pos[0] + 1, pos[1])
   ].filterIt(
-    it[0] >= 0 and it[1] >= 0 and it[0] < cavern.len*5 and it[1] < cavern[0].len*5
+    it[0] >= 0 and it[1] >= 0 and it[0] < cavern.len*CAVE_MULT and it[1] < cavern[0].len*CAVE_MULT
   ).mapIt((it, cavern[it]))
 
 template `<`(tup1, tup2: (Position, int)): bool =
@@ -42,12 +44,12 @@ proc main() =
   var
     visited = HashSet[Position]()
     currentNode: Position = (0, 0)
-    endNode: Position = (cavern.len*5-1, cavern[0].len*5-1)
+    endNode: Position = (cavern.len*CAVE_MULT-1, cavern[0].len*CAVE_MULT-1)
 
   # Use djikstra's algo with a heap queue
   var distanceMap = collect:
-    for i in 0..<cavern.len*5:
-      for j in 0..<cavern[0].len*5:
+    for i in 0..<cavern.len*CAVE_MULT:
+      for j in 0..<cavern[0].len*CAVE_MULT:
         {(i, j): int.high}
 
   distanceMap[currentNode] = 0
